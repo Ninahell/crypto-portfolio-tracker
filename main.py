@@ -6,14 +6,33 @@ from app.transaction import Transaction
 def main():
     portfolio = Portfolio()
 
-    tx1 = Transaction("BTC", 0.1, 30000, datetime.now())
-    tx2 = Transaction("ETH", 1.5, 2000, datetime.now())
+    while True:
+        print("\n--- CRYPTO PORTFOLIO ---")
+        print("1. Add transaction")
+        print("2. Show balance")
+        print("3. Show total value")
+        print("4. Exit")
 
-    portfolio.add_transaction(tx1)
-    portfolio.add_transaction(tx2)
+        choice = input("Choose: ")
 
-    print("Balance:", portfolio.get_balance())
-    print("Total value:", portfolio.total_value())
+        if choice == "1":
+            asset = input("Asset (BTC/ETH): ")
+            amount = float(input("Amount: "))
+            price = float(input("Price: "))
+
+            tx = Transaction(asset, amount, price, datetime.now())
+            portfolio.add_transaction(tx)
+
+            print("Transaction added!")
+
+        elif choice == "2":
+            print(portfolio.get_balance())
+
+        elif choice == "3":
+            print(portfolio.total_value())
+
+        elif choice == "4":
+            break
 
 
 if __name__ == "__main__":
