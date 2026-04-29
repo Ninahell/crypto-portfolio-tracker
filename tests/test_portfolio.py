@@ -3,10 +3,13 @@ from app.transaction import Transaction
 from datetime import datetime
 
 
-def test_add_transaction():
+def test_balance_calculation():
     portfolio = Portfolio()
-    tx = Transaction("BTC", 1, 10000, datetime.now())
+    portfolio.transactions = []
 
-    portfolio.add_transaction(tx)
+    portfolio.add_transaction(Transaction("BTC", 1, 10000, datetime.now()))
+    portfolio.add_transaction(Transaction("BTC", 2, 20000, datetime.now()))
 
-    assert len(portfolio.transactions) == 1
+    balance = portfolio.get_balance()
+
+    assert balance["BTC"] == 3
