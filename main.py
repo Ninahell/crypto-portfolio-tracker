@@ -1,42 +1,35 @@
 from datetime import datetime
+
+from app.cli import create_parser
 from app.portfolio import Portfolio
 from app.transaction import Transaction
 
 
 def main():
+    parser = create_parser()
+    args = parser.parse_args()
+
     portfolio = Portfolio()
 
-    while True:
-        print("\n--- CRYPTO PORTFOLIO ---")
-        print("1. Add transaction")
-        print("2. Show balance")
-        print("3. Show total value")
-        print("4. Exit")
+    if args.command == "add":
+        tx = Transaction(
+            asset=args.asset,
+            amount=args.amount,
+            price=args.price,
+            timestamp=datetime.now()
+        )
 
-        choice = input("Choose: ")
+        portfolio.add_transaction(tx)
+        print("Transaction added")
 
-        if choice == "1":
-            asset = input("Asset (BTC/ETH): ")
-            try:
-    amount = float(input("Amount: "))
-    price = float(input("Price: "))
-except ValueError:
-    print("Invalid numeric input")
-    continue
+    elif args.command == "balance":
+        print(portfolio.get_balance())
 
-            tx = Transaction(asset, amount, price, datetime.now())
-            portfolio.add_transaction(tx)
+    elif args.command == "value":
+        print(portfolio.total_value())
 
-            print("Transaction added!")
-
-        elif choice == "2":
-            print(portfolio.get_balance())
-
-        elif choice == "3":
-            print(portfolio.total_value())
-
-        elif choice == "4":
-            break
+    else:
+        parser.print_help()
 
 
 if __name__ == "__main__":
