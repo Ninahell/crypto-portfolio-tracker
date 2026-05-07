@@ -17,8 +17,12 @@ def main():
 
         if choice == "1":
             asset = input("Asset (BTC/ETH): ")
-            amount = float(input("Amount: "))
-            price = float(input("Price: "))
+            try:
+    amount = float(input("Amount: "))
+    price = float(input("Price: "))
+except ValueError:
+    print("Invalid numeric input")
+    continue
 
             tx = Transaction(asset, amount, price, datetime.now())
             portfolio.add_transaction(tx)
