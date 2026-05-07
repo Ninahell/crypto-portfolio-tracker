@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
 venv/
-portfolio.json
+portfolio.db
 .idea/
 .vscode/
