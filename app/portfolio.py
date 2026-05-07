@@ -2,7 +2,7 @@ from collections import defaultdict
 from typing import List
 from app.transaction import Transaction
 from app.storage import Storage
-
+from app.logger import logger
 
 class Portfolio:
     def __init__(self):
@@ -21,3 +21,4 @@ class Portfolio:
 
     def total_value(self):
         return sum(tx.value() for tx in self.transactions)
+
