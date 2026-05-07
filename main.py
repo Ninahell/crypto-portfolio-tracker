@@ -9,7 +9,9 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
 
-    portfolio = Portfolio()
+initialize_database()
+
+portfolio = Portfolio()
 
     if args.command == "add":
         tx = Transaction(
