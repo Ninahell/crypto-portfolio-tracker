@@ -11,7 +11,11 @@ class Portfolio:
 
     def add_transaction(self, tx: Transaction):
         self.transactions.append(tx)
-        self.storage.save(self.transactions)
+self.storage.save(self.transactions)
+
+logger.info(
+    f"Transaction added: {tx.asset} | amount={tx.amount} | price={tx.price}"
+)
 
     def get_balance(self):
         balance = defaultdict(float)
