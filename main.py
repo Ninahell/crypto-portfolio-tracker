@@ -3,7 +3,7 @@ from datetime import datetime
 from app.cli import create_parser
 from app.portfolio import Portfolio
 from app.transaction import Transaction
-
+from app.database.schema import initialize_database
 
 def main():
     parser = create_parser()
