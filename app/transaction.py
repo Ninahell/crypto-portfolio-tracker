@@ -11,3 +11,12 @@ class Transaction:
 
     def value(self) -> float:
         return self.amount * self.price
+
+    def __repr__(self):
+        return (
+            f"Transaction("
+            f"asset={self.asset}, "
+            f"amount={self.amount}, "
+            f"price={self.price}"
+            f")"
+        )
