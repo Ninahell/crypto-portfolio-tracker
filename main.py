@@ -46,7 +46,35 @@ elif args.command == "export":
     export_transactions_to_csv(transactions)
 
     print("CSV report exported")
-    else:
+
+elif args.command == "filter":
+    transactions = service.get_transactions()
+
+    if args.asset:
+        transactions = (
+            service.filter_transactions_by_asset(
+                args.asset.upper()
+            )
+        )
+
+    elif args.min_price:
+        transactions = (
+            service.filter_transactions_by_min_price(
+                args.min_price
+            )
+        )
+
+    elif args.min_amount:
+        transactions = (
+            service.filter_transactions_by_min_amount(
+                args.min_amount
+            )
+        )
+
+    for transaction in transactions:
+        print(transaction)
+
+else:
         parser.print_help()
 
 
