@@ -4,7 +4,7 @@ from app.cli import create_parser
 from app.database.schema import initialize_database
 from app.services.portfolio_service import PortfolioService
 from app.transaction import Transaction
-
+from app.utils import export_transactions_to_csv
 
 def main():
     parser = create_parser()
@@ -31,7 +31,12 @@ def main():
 
     elif args.command == "value":
         print(service.calculate_total_value())
+elif args.command == "export":
+    transactions = service.get_transactions()
 
+    export_transactions_to_csv(transactions)
+
+    print("CSV report exported")
     else:
         parser.print_help()
 
