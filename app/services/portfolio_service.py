@@ -4,13 +4,14 @@ from app.logger import logger
 from app.repositories.transaction_repository import TransactionRepository
 from app.transaction import Transaction
 from app.validators.transaction_validator import TransactionValidator
+from app.validators.helpers import normalize_asset_name
 
 class PortfolioService:
     def __init__(self):
         self.repository = TransactionRepository()
 
     def add_transaction(self, transaction: Transaction):
-        TransactionValidator.validate_asset(
+transaction.asset = normalize_asset_name(
     transaction.asset
 )
 
