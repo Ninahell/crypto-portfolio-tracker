@@ -5,6 +5,7 @@ from app.database.schema import initialize_database
 from app.services.portfolio_service import PortfolioService
 from app.transaction import Transaction
 from app.utils import export_transactions_to_csv
+from app.validators.exceptions import ValidationError
 
 def main():
     parser = create_parser()
@@ -14,13 +15,21 @@ def main():
 
     service = PortfolioService()
 
-    if args.command == "add":
+   if args.command == "add":
+    try:
         transaction = Transaction(
             asset=args.asset,
             amount=args.amount,
             price=args.price,
             timestamp=datetime.now()
         )
+
+        service.add_transaction(transaction)
+
+        print("Transaction added")
+
+    except ValidationError as error:
+        print(f"Validation error: {error}")
 
         service.add_transaction(transaction)
 
