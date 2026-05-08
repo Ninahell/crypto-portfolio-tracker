@@ -3,13 +3,24 @@ from collections import defaultdict
 from app.logger import logger
 from app.repositories.transaction_repository import TransactionRepository
 from app.transaction import Transaction
-
+from app.validators.transaction_validator import TransactionValidator
 
 class PortfolioService:
     def __init__(self):
         self.repository = TransactionRepository()
 
     def add_transaction(self, transaction: Transaction):
+        TransactionValidator.validate_asset(
+    transaction.asset
+)
+
+TransactionValidator.validate_amount(
+    transaction.amount
+)
+
+TransactionValidator.validate_price(
+    transaction.price
+)
         self.repository.add(transaction)
 
         logger.info(
