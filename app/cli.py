@@ -17,4 +17,19 @@ def create_parser():
     subparsers.add_parser("balance")
     subparsers.add_parser("value")
 subparsers.add_parser("export")
-    return parser
+filter_parser = subparsers.add_parser("filter")
+
+filter_parser.add_argument(
+    "--asset"
+)
+
+filter_parser.add_argument(
+    "--min-price",
+    type=float
+)
+
+filter_parser.add_argument(
+    "--min-amount",
+    type=float
+)  
+return parser
